@@ -19,6 +19,7 @@ https://googlechromelabs.github.io/chrome-for-testing/
 ```
 git clone https://github.com/ronething/xiudong-selenium.git
 pip3 install -r req.txt
+pip install -r req.txt
 python3 main.py
 ```
 
