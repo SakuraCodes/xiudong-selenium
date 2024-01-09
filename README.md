@@ -8,9 +8,12 @@ github repo: https://github.com/ronething/xiudong-selenium 防止一部分爬虫
 
 #### usage
 
-chromedriver 程序需要下载一下
+下载chromedriver.exe,放到项目根目录
 
 https://chromedriver.chromium.org/downloads
+
+If you are using Chrome version 115 or newer
+https://googlechromelabs.github.io/chrome-for-testing/
 
 ```
 git clone https://github.com/ronething/xiudong-selenium.git
