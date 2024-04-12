@@ -1,10 +1,2 @@
-.DS_Store
-
-.idea/
-.vscode/
-
-__pycache__/
-
-chromedriver
-chromedriver_linux
-chromedriver.exe
+/.git
+/.idea
