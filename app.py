@@ -17,9 +17,9 @@ def create_app(driver, pool):
             print(driver.window_handles)
             driver.switch_to.window(driver.window_handles[0])  # 切换到第一个窗口
         except Exception as e:
-            print(f'切换窗口失败, err: {e}')
+            print(f"切换窗口失败, err: {e}")
             errmsg = str(e)
-            if 'chrome not reachable' in errmsg:
+            if "chrome not reachable" in errmsg:
                 # 重新启动 driver，这里可以做一个 reload driver func,单例 driver
                 pass
         # 注入 selenium driver
@@ -37,7 +37,7 @@ def init_router(app: Flask):
     def hello_world():
         return "<p>Hello, World!</p>"
 
-    @app.route('/login')
+    @app.route("/login")
     def login_website():
         # 登录网站
         driver: webdriver.Chrome = g.driver
@@ -45,9 +45,9 @@ def init_router(app: Flask):
         pool.submit(goto_login_url, driver=driver)  # 不需要获取结果
         # goto_login_url(driver)
 
-        return 'login OK'
+        return "login OK"
 
-    @app.route('/buy', methods=['GET', 'POST'])
+    @app.route("/buy", methods=["GET", "POST"])
     def buy():
         # 通用抢票 api， 需要传入 ticketId 以及 event
         # 可选项: cron_time 表示是否定时
@@ -55,26 +55,26 @@ def init_router(app: Flask):
         # example: ?event=123&ticketId=456
         driver: webdriver.Chrome = g.driver
         pool: ThreadPoolExecutor = g.pool
-        ticketId = request.args.get('ticketId')
-        event = request.args.get('event')
+        ticketId = request.args.get("ticketId")
+        event = request.args.get("event")
         if not ticketId or not event:
-            return 'ERROR'
+            return "ERROR"
 
-        ticketNum = request.args.get('ticketNum')
+        ticketNum = request.args.get("ticketNum")
         if not ticketNum:
             ticketNum = 1
-        print('ticketNum = ', ticketNum)
+        print("ticketNum = ", ticketNum)
 
         # 是否需要选择观演人 以及几个人
-        need_select = request.args.get('need_select', False)
-        select_num = request.args.get('select_num', 1)
+        need_select = request.args.get("need_select", False)
+        select_num = request.args.get("select_num", 1)
 
-        cron_time = request.args.get('cron_time')
+        cron_time = request.args.get("cron_time")
         if not cron_time:
             cron = False
         else:
             cron = True
-        print(f'cron_time is {cron_time}, 是否是定时配置: {cron}')
+        print(f"cron_time is {cron_time}, 是否是定时配置: {cron}")
 
         # 提交任务
         pool.submit(
@@ -88,12 +88,12 @@ def init_router(app: Flask):
             select_num,
         )
 
-        return 'buy OK'
+        return "buy OK"
 
-    @app.route('/quit')
+    @app.route("/quit")
     def quit_website():
         # 退出
         driver: webdriver.Chrome = g.driver
         quit_driver(driver)
 
-        return '关闭 driver OK'
+        return "关闭 driver OK"
